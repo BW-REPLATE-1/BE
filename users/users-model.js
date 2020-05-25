@@ -12,15 +12,14 @@ function findBy(filter) {
 
 async function add(user) {
     const [id] = await db("users").insert(user, "id");
-    const rounds = process.env.HASH_ROUTER;
-    user.password = await bcrypt.hash(user.password, rounds)
+    //const rounds = process.env.HASH_ROUTER;
+    user.password = await bcrypt.hash(user.password, 14)
 
     return findById(id);
 }
     //     const rounds = process.env.HASH_ROUTER;
     //     user.password = await bcrypt.hash(user.password, rounds)
     //     user.password = await bcrypt.hash(user.password, 10)
-    
     //     const [id] = await db("users").insert(user, "id");
     //     return findById(id);
 
