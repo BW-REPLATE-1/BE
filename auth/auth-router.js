@@ -21,8 +21,8 @@ function generateToken(user) {
 
 router.post('/register', (req,res) => {
     let user = req.body;
-    const rounds = process.env.HASH_ROUTER;
-    const hash = bcrypt.hashSync(user.password, rounds);
+    //const rounds = process.env.HASH_ROUTER;
+    const hash = bcrypt.hashSync(user.password, 14);
     user.password = hash;
 
     Users.add(user).then(saved => {
