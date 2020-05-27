@@ -1,4 +1,4 @@
-  
+
 module.exports = {
   development: {
     client: 'sqlite3',
@@ -18,4 +18,32 @@ module.exports = {
       directory: './database/seeds',
     },
   },
-}
+  // staging: {
+  //   client: 'sqlite3',
+  //   connection: {
+  //     database: 'my_db',
+  //   },
+  //   pool: {
+  //     min: 2,
+  //     max: 10
+  //   },
+  //   migrations: {
+  //     tableName: 'knex_migrations'
+  //   }
+  // },
+  // production: {
+  //   client: 'sqlite3',
+  //   connection: ,
+  //     useNullAsDefault: true,
+  //     pool: {
+  //       min: 2,
+  //       max: 10
+  //     },
+  //     migrations: {
+  //       directory: './database/migrations',
+  //     },
+  //     seeds: {
+  //       directory: './database/seeds',
+  //     },
+  //   }
+  }

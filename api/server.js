@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser")
 // express routers
 const usersRouter = require('../users/users-router');
 const authRouter = require('../auth/auth-router');
+//const businessRouter = require('../users/business-router');
 
 // server object
 const server = express();
@@ -18,6 +19,7 @@ server.use(cookieParser());
 
 server.use('/api/users', usersRouter);
 server.use('/api/auth', authRouter);
+//server.use('/api/business', businessRouter);
 
 server.get("/", (req, res, next) => {
     res.json({
