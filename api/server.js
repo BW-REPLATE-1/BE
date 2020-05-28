@@ -6,7 +6,8 @@ const cookieParser = require("cookie-parser")
 // express routers
 const usersRouter = require('../users/users-router');
 const authRouter = require('../auth/auth-router');
-//const businessRouter = require('../users/business-router');
+const businessProfileRouter = require('../users/business-profiles-router');
+//const volunteerProfileRouter = require('../users/volunteer-profiles-router');
 
 // server object
 const server = express();
@@ -19,7 +20,8 @@ server.use(cookieParser());
 
 server.use('/api/users', usersRouter);
 server.use('/api/auth', authRouter);
-//server.use('/api/business', businessRouter);
+server.use('/api/business-profiles', businessProfileRouter);
+//server.use('/api/volunteer-profiles', volunteerProfileRouter);
 
 server.get("/", (req, res, next) => {
     res.json({
