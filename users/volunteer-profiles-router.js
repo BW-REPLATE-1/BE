@@ -20,7 +20,6 @@ router.post("/", (req, res) => {
         })
 })
 
-
 // GET all volunteer profiles
 router.get("/", (req, res) => {
     VP.get()

@@ -18,7 +18,7 @@ function insert(data) {
     return db('volunteer-profile')
         .insert(data)
         .then(id => {
-            return getById(id[0])
+            return findById(id[0])
         })
 }
 

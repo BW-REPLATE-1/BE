@@ -20,11 +20,11 @@ server.use(helmet());
 server.use(cors());
 server.use(express.json());
 
-server.use('/api/users', authenticate, usersRouter);
 server.use('/api/auth', authRouter);
+server.use('/api/users', authenticate, usersRouter);
 server.use('/api/business-profiles', authenticate, businessProfileRouter);
-server.use('/api/volunteer-profiles', volunteerProfileRouter);
-server.use('/api/requests', requestsRouter);
+server.use('/api/volunteer-profiles', authenticate, volunteerProfileRouter);
+server.use('/api/requests', authenticate, requestsRouter);
 
 server.get("/", (req, res, next) => {
     res.json({
