@@ -14,13 +14,13 @@ function get() {
     return db('business-profile')
 }
 
-function insert(data) {
-    return db('business-profile')
-        .insert(data)
-        .then(id => {
-            return getById(id[0])
-        })
-}
+// function insert(data) {
+//     return db('business-profile')
+//         .insert(data)
+//         .then(id => {
+//             return getById(id[0])
+//         })
+// }
 
 function findById(id) {
     return db("business-profile")
@@ -53,3 +53,12 @@ function findUserProfileById(userId, id) {
 //         .where({ user_id: userId })
 //         .select(["b.id", "b.username", "b.email, b.business_name, b.business_address, b.phone_number"])
 // }
+function insert(data) {
+    return db('business-profile as b')
+    .join('users as u, b.user_is, u.id')
+    .where({user_id: u.id})
+        .insert(data)
+        .then(id => {
+            return getById(id[0])
+        })
+}

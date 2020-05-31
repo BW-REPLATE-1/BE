@@ -7,8 +7,7 @@ exports.seed = function (knex) {
       email: "jbbq@gmail.com",
       business_name: "Jay's BBQ",
       business_address: "391 Riverside Ave. Chicago, IL 606019",
-      phone_number: 7735551010,
-      user_id: 1
+      phone_number: 7735551010
     },
     {
       id: 2,
@@ -16,8 +15,7 @@ exports.seed = function (knex) {
       email: "thekernel@gmail.com",
       business_name: "The Kernel",
       business_address: "223 Hilldale Dr. Chicago, IL 606012",
-      phone_number: 3125551212,
-      user_id: 2
+      phone_number: 3125551212
     }
   ]);
 };
