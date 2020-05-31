@@ -17,6 +17,13 @@ exports.up = function (knex) {
             volunteer
                 .integer("phone_number")
                 .notNullable()
+            volunteer
+                .integer("user_id")
+                .unsigned()
+                .references("id")
+                .inTable("users")
+                .onUpdate("CASCADE")
+                .onDelete("CASCADE")
         })
 };
 

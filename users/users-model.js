@@ -3,7 +3,7 @@ const db = require("../database/dbConfig.js");
 require("dotenv").config();
 
 function get() {
-    return db("users").select("id", "username");
+    return db("users").select("*");
 }
 
 function findBy(filter) {

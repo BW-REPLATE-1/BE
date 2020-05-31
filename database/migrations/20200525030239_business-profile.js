@@ -20,6 +20,13 @@ exports.up = function (knex) {
             business
                 .integer("phone_number")
                 .notNullable()
+            business
+                .integer("user_id")
+                .unsigned()
+                .references("id")
+                .inTable("users")
+                .onUpdate("CASCADE")
+                .onDelete("CASCADE")
         })
 };
 

@@ -58,7 +58,7 @@ router.get("/", (req, res) => {
 });
 
 // GET business profile by id
-router.get('/:id', (req, res) => {
+router.get('/:id', restrict, (req, res) => {
   const { id } = req.params;
 
   BP.findById(id)
@@ -99,8 +99,8 @@ router.get('/:id/requests', (req, res) => {
     });
 });
 
-// // PUT update business profile
-router.put("/:id", (req, res) => {
+// PUT update business profile
+router.put("/:id", restrict, (req, res) => {
   if (!req.body.username || !req.body.email) {
     return res.status(400).json({
       message: "Missing username or email",
@@ -125,7 +125,7 @@ router.put("/:id", (req, res) => {
 })
 
 // DELETE removes business profile
-router.delete("/:id", (req, res) => {
+router.delete("/:id", restrict, (req, res) => {
   BP.remove(req.params.id)
     .then((profile) => {
       if (profile) {
@@ -139,7 +139,7 @@ router.delete("/:id", (req, res) => {
     .catch((error) => {
       console.log(error);
       return res.status(500).json({
-        error: "The profile could not be removed",
+        error: "This profile could not be removed",
       })
     })
 })
