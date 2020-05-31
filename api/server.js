@@ -10,7 +10,7 @@ const businessProfileRouter = require('../users/business-profiles-router');
 const volunteerProfileRouter = require('../users/volunteer-profiles-router');
 const requestsRouter = require('../requests/requests-router');
 
-const restrict = require('../middleware/restrict');
+const authenticate = require('../middleware/authenticate');
 
 // server object
 const server = express();
@@ -20,9 +20,9 @@ server.use(helmet());
 server.use(cors());
 server.use(express.json());
 
-server.use('/api/users', restrict, usersRouter);
+server.use('/api/users', authenticate, usersRouter);
 server.use('/api/auth', authRouter);
-server.use('/api/business-profiles', businessProfileRouter);
+server.use('/api/business-profiles', authenticate, businessProfileRouter);
 server.use('/api/volunteer-profiles', volunteerProfileRouter);
 server.use('/api/requests', requestsRouter);
 

@@ -61,7 +61,6 @@ router.put("/:id", (req, res) => {
 
 // DELETE removes request 
 router.delete("/:id", (req, res) => {
-    
     Requests.remove(req.params.id)
         .then((removed) => {
             if (removed) {

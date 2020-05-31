@@ -23,6 +23,7 @@ exports.up = function (knex) {
             business
                 .integer("user_id")
                 .unsigned()
+                .notNullable()
                 .references("id")
                 .inTable("users")
                 .onUpdate("CASCADE")

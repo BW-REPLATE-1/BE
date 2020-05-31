@@ -51,9 +51,6 @@ function findBusiness(business_id) {
         )
 }
 
-// function pendingPickup () {
-
-// }
 function update(id, changes) {
     return db("requests")
         .where('id', id)
@@ -66,19 +63,4 @@ function remove(id) {
         .del()
 }
 
-function getBusiness(id) {
-    return db("requests as r")
-        .join("business-profile as b", "b.id", "r.business_id")
-        .where("r.assigned_pickup", id)
-        .select(
-            "b.id",
-            "r.food_type",
-            "r.food_amount",
-            "r.description",
-            "r.pickup_time",
-            "r.business_address",
-            "r.completed",
-            "r.business_id"
-        )
-}
 

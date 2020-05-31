@@ -1,10 +1,9 @@
 const router = require('express').Router();
 const BP = require('../models/business-model');
 const requests = require('../models/requests-model');
-const restrict = require('../middleware/restrict');
 
 // POST creates new business profile
-router.post("/", restrict, (req, res) => {
+router.post("/", (req, res) => {
   if (!req.body.username || !req.body.email) {
     return res.status(400).json({
       message: "Please provide username and email for your profile.",
@@ -29,13 +28,14 @@ router.post('/:id/request', (req, res) => {
       message: "Missing content .",
     })
   }
-  requests.insert(req.params.body, id)
+  requests.insert(req.body)
     .then(() => {
       res.status(201).json({
         message: "Request created!"
       });
     })
     .catch(err => {
+      console.log(err)
       res.status(500).json({
         message: 'Failed to create new request',
       });
@@ -58,7 +58,7 @@ router.get("/", (req, res) => {
 });
 
 // GET business profile by id
-router.get('/:id', restrict, (req, res) => {
+router.get('/:id',(req, res) => {
   const { id } = req.params;
 
   BP.findById(id)
@@ -100,7 +100,7 @@ router.get('/:id/requests', (req, res) => {
 });
 
 // PUT update business profile
-router.put("/:id", restrict, (req, res) => {
+router.put("/:id", (req, res) => {
   if (!req.body.username || !req.body.email) {
     return res.status(400).json({
       message: "Missing username or email",
@@ -125,7 +125,7 @@ router.put("/:id", restrict, (req, res) => {
 })
 
 // DELETE removes business profile
-router.delete("/:id", restrict, (req, res) => {
+router.delete("/:id", (req, res) => {
   BP.remove(req.params.id)
     .then((profile) => {
       if (profile) {
