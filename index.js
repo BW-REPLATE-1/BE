@@ -10,7 +10,8 @@ server.use((err, req, res, next) => {
     });
 });
 
-server.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`)
-}); 
-
+if (!module.parent) {
+	server.listen(PORT, () => {
+		console.log(`Running at http://localhost:${PORT}`)
+    })
+};
