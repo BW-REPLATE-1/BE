@@ -65,4 +65,42 @@ HTTP Method: [POST]
 > Invalid credentials
 
 ***500 (Internal Server Error)***
-> Server error returns status code 501
+> Server error returns status code 500
+
+## Create a Business Profile
+
+HTTP Method: [POST]
+
+*URL: /api/auth/login*
+
+### Body
+
+| Name         | Type   | Required | Description              |
+| ------------ | ------ | -------- | ------------------------ |
+| username     | String | Yes      | Business' username       |
+| email        | String | Yes      | Business' email          |
+| busines_name | String | Yes      | Name of organization     |
+
+### Example
+
+```
+{
+      username: "iampopcorn",
+      email: "iampopcorn@gmail.com",
+      business_name: "I Am Popcorn",
+      business_address: "391 Riverside Ave. Munster, IN 606019",
+      phone_number: 7735551010,
+      user_id: 1
+}
+```
+
+### Response
+
+***201 (Created)***
+> Business was able to create profile successfully
+
+***401 (Unauthorized)***
+> Invalid credentials
+
+***500 (Internal Server Error)***
+> Server error returns status code 500
