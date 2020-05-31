@@ -41,8 +41,3 @@ function remove(id) {
         .where('id', id)
         .del()
 }
-function findUserProfileById(userId, id) {
-	return db("volunteer-profile")
-		.where({ id, user_id: userId })
-		.first()
-}
