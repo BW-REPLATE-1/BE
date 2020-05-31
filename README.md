@@ -71,15 +71,17 @@ HTTP Method: [POST]
 
 HTTP Method: [POST]
 
-*URL: /api/auth/login*
+*URL: /api/business-profile*
 
 ### Body
 
-| Name         | Type   | Required | Description              |
-| ------------ | ------ | -------- | ------------------------ |
-| username     | String | Yes      | Business' username       |
-| email        | String | Yes      | Business' email          |
-| busines_name | String | Yes      | Name of organization     |
+| Name               | Type   | Required | Description              |
+| ------------------ | ------ | -------- | ------------------------ |
+| username           | String | Yes      | Business' username       |
+| email              | String | Yes      | Business' email          |
+| busines_name       | String | Yes      | Name of organization     |
+| business_address   | String | Yes      | Business' address        |
+| phone_number       | String | Yes      | Business' email          |
 
 ### Example
 
