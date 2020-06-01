@@ -1,18 +1,24 @@
 const jwt = require("jsonwebtoken");
+const secret = require("../config/secrets");
+require("dotenv").config();
 
 module.exports = (req, res, next) => {
-  const { token } = req.headers;
-  if (token) {
-    const secret = process.env.JWT_SECRET || "bees sometimes sting other bees";
-    jwt.verify(token, secret, function (err, decodedToken) {
-      if (err) {
-        res.status(401).json({ message: "No shoes, no shirt.......no token" });
-      } else {
-        req.token = decodedToken;
-        next();
-      }
-    });
-  } else {
-    res.status(400).json({ message: "You shall not pass!" });
-  }
-};
+    const authError = {
+        message: "Invalid crendentials",
+    }
+    const token = req.headers.authorization // where the token value comes from 
+    
+    if (!token) {
+        return res.status(401).json(authError)
+    } else {
+        jwt.verify(token, secret.jwtSecret, (err, decodedPayload) => {
+            if (err) {
+                return res.status(401).json(authError)
+            } else {
+                req.token = decodedPayload
+                next()
+            }
+        })
+    }
+}
+

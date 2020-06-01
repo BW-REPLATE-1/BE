@@ -14,12 +14,9 @@ function get() {
     return db('business-profile')
 }
 
-function insert(data) {
-    return db('business-profile')
-        .insert(data)
-        .then(id => {
-            return getById(id[0])
-        })
+async function insert(data) {
+    const [id] = await db("business-profile").insert(data);
+    return db('business-profile').where({ id })
 }
 
 function findById(id) {
@@ -41,15 +38,8 @@ function remove(id) {
         .where('id', id)
         .del()
 }
-function findUserProfileById(userId, id) {
-	return db("business-profile")
-		.where({ id, user_id: userId })
-		.first()
+function findUserProfileById(user_id) {
+    return db("business-profile")
+        .where({ user_id })
+        .first()
 }
-
-// function findUserProfile(userId) {
-//     return db("business-profile as b")
-//         .join("users as u", "b.user_id", "u.id")
-//         .where({ user_id: userId })
-//         .select(["b.id", "b.username", "b.email, b.business_name, b.business_address, b.phone_number"])
-// }

@@ -9,17 +9,21 @@ exports.up = function (knex) {
             request
                 .integer("food_amount", 128)
                 .notNullable();
-                request
+            request
                 .string("description")
                 .notNullable()
             request
                 .dateTime("pickup_time")
                 .notNullable()
             request
+                .string("business_address")
+                .notNullable()
+            request
                 .boolean("completed")
             request
                 .integer("business_id")
                 .unsigned()
+                .notNullable()
                 .references("id")
                 .inTable("users")
                 .onUpdate("CASCADE")

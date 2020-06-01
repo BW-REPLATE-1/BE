@@ -18,7 +18,7 @@ function insert(data) {
     return db('volunteer-profile')
         .insert(data)
         .then(id => {
-            return getById(id[0])
+            return findById(id[0])
         })
 }
 
@@ -40,9 +40,4 @@ function remove(id) {
     return db('volunteer-profile')
         .where('id', id)
         .del()
-}
-function findUserProfileById(userId, id) {
-	return db("volunteer-profile")
-		.where({ id, user_id: userId })
-		.first()
 }

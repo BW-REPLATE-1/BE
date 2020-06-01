@@ -1,27 +1,47 @@
 const router = require('express').Router();
-const BP = require('../models/business-model.js');
+const BP = require('../models/business-model');
+const requests = require('../models/requests-model');
 
 // POST creates new business profile
-router.post('/', (req, res) => {
-  const info = req.body;
-
-  if (!info.business_name) {
-    res.status(400).json({
-      message: "Please provide business name"
+router.post("/", (req, res) => {
+  if (!req.body.username || !req.body.email) {
+    return res.status(400).json({
+      message: "Please provide username and email for your profile.",
     })
-  } else {
-    BP.insert("business-profile", info)
-      .then(data => {
-        res.status(201).json(data);
+  } 
+  BP.insert(req.body)
+    .then((data) => {
+      res.status(201).json(data);
+    })
+    .catch((error) => {
+      console.log(error);
+      return res.status(500).json({
+        message: "There was an error while saving the profile to the database",
       })
-      .catch(err => {
-        console.log(err)
-        res.status(500).json({
-          message: 'Failed to create new profile',
-        });
-      });
+    })
+})
+
+// POST business can create a new request
+router.post('/:id/request', (req, res) => {
+  if (!req.body.food_type && req.body.pickup_time && req.body.business_address) {
+    return res.status(400).json({
+      message: "Missing content .",
+    })
   }
+  requests.insert(req.body)
+    .then(() => {
+      res.status(201).json({
+        message: "Request created!"
+      });
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({
+        message: 'Failed to create new request',
+      });
+    });
 });
+
 
 // GET all business profiles
 router.get("/", (req, res) => {
@@ -38,7 +58,7 @@ router.get("/", (req, res) => {
 });
 
 // GET business profile by id
-router.get('/:id', (req, res) => {
+router.get('/:id',(req, res) => {
   const { id } = req.params;
 
   BP.findById(id)
@@ -58,7 +78,28 @@ router.get('/:id', (req, res) => {
     });
 });
 
-// // PUT update business profile
+// GET requests by business id
+router.get('/:id/requests', (req, res) => {
+  const { id } = req.params;
+
+  requests.findBusiness(id)
+    .then(request => {
+      if (request) {
+        res.json(request);
+      } else {
+        res.status(404).json({
+          message: 'Could not find request with given id.',
+        })
+      }
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: 'Failed to get request',
+      });
+    });
+});
+
+// PUT update business profile
 router.put("/:id", (req, res) => {
   if (!req.body.username || !req.body.email) {
     return res.status(400).json({
@@ -98,10 +139,9 @@ router.delete("/:id", (req, res) => {
     .catch((error) => {
       console.log(error);
       return res.status(500).json({
-        error: "The profile could not be removed",
+        error: "This profile could not be removed",
       })
     })
 })
 
 module.exports = router;
-
